@@ -1,0 +1,14 @@
+#Cmake files
+*.cmake
+*/financeGUI_autogen
+*/CMakeFiles
+Makefile
+CMakeCache.txt
+
+#Qt
+*.pro
+*.user
+
+#existing data
+*/data
+*/bin

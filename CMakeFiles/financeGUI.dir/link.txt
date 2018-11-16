@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/financeGUI.dir/src/database.cpp.o CMakeFiles/financeGUI.dir/src/main.cpp.o CMakeFiles/financeGUI.dir/src/mainwindow.cpp.o CMakeFiles/financeGUI.dir/financeGUI_autogen/mocs_compilation.cpp.o  -o bin/financeGUI /usr/lib/libQt5Widgets.so.5.11.2 /usr/lib/libQt5Sql.so.5.11.2 /usr/lib/libQt5Gui.so.5.11.2 /usr/lib/libQt5Core.so.5.11.2 
