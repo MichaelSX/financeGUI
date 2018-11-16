@@ -1,4 +1,0 @@
-/home/marschmidt/Programming/C++/financeGUI/CMakeFiles/rebuild_cache.dir
-/home/marschmidt/Programming/C++/financeGUI/CMakeFiles/financeGUI.dir
-/home/marschmidt/Programming/C++/financeGUI/CMakeFiles/edit_cache.dir
-/home/marschmidt/Programming/C++/financeGUI/CMakeFiles/financeGUI_autogen.dir
