@@ -22,13 +22,17 @@ private:
 
     DataBase *db;
     QSqlTableModel *model;
+    QSqlTableModel *model2;
 
 private slots:
     // adapted from https://evileg.com/en/post/62/
     // Methods for Tableview
     void setupModel(const QString &tableName, const QStringList &headers);
+    void on_pushInput_clicked();
+    void on_action_add_single_Entry_triggered();
     void createUI();
-
+    void updateUI(QWidget* currentTab);
+    void currentDateUpdate();
 };
 
 #endif // MAINWINDOW_H

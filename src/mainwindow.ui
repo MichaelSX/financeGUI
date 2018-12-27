@@ -17,10 +17,46 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Year</string>
+      <item row="1" column="0">
+       <widget class="QDateEdit" name="inputDate">
+        <property name="focusPolicy">
+         <enum>Qt::WheelFocus</enum>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::UpDownArrows</enum>
+        </property>
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
+        <property name="dateTime">
+         <datetime>
+          <hour>0</hour>
+          <minute>0</minute>
+          <second>0</second>
+          <year>2010</year>
+          <month>9</month>
+          <day>1</day>
+         </datetime>
+        </property>
+        <property name="maximumDate">
+         <date>
+          <year>7900</year>
+          <month>12</month>
+          <day>31</day>
+         </date>
+        </property>
+        <property name="minimumDate">
+         <date>
+          <year>1950</year>
+          <month>1</month>
+          <day>1</day>
+         </date>
+        </property>
+        <property name="displayFormat">
+         <string>yyyy- dd.MM</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -49,22 +85,6 @@
        <widget class="QLabel" name="label_5">
         <property name="text">
          <string>Comment</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QSpinBox" name="inputYear">
-        <property name="suffix">
-         <string/>
-        </property>
-        <property name="minimum">
-         <number>1990</number>
-        </property>
-        <property name="maximum">
-         <number>2150</number>
-        </property>
-        <property name="value">
-         <number>2015</number>
         </property>
        </widget>
       </item>
@@ -107,6 +127,13 @@
         </property>
        </widget>
       </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_16">
+        <property name="text">
+         <string>Year - Date</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>
@@ -115,7 +142,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="overviewTab">
        <attribute name="title">
@@ -151,9 +178,45 @@
        <attribute name="title">
         <string>2015</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="1" column="1" rowspan="2" colspan="2">
+         <widget class="QLabel" name="year1_plus">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1" colspan="2">
+         <widget class="QTableView" name="year1Tab_viewl"/>
+        </item>
+        <item row="3" column="3">
+         <widget class="QTableView" name="year1Tab_viewr"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="year1_sum">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <spacer name="verticalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Minimum</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>5</width>
+              <height>5</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
           <item>
            <widget class="QLabel" name="label_6">
             <property name="text">
@@ -175,7 +238,7 @@
            <widget class="QDateEdit" name="endDate1"/>
           </item>
           <item>
-           <widget class="QPushButton" name="periodButton1">
+           <widget class="QPushButton" name="showButton">
             <property name="text">
              <string>Show</string>
             </property>
@@ -196,21 +259,111 @@
           </item>
          </layout>
         </item>
-        <item>
-         <widget class="QTableView" name="tableView"/>
-        </item>
-        <item>
-         <widget class="QTableView" name="tableView_2"/>
+        <item row="2" column="3">
+         <widget class="QLabel" name="year1_minus">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="year2Tab">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <attribute name="title">
         <string>2016</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="1" column="1">
+         <widget class="QLabel" name="year2_plus">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLabel" name="year2_minus">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QTableView" name="year2Tab_viewl"/>
+        </item>
+        <item row="2" column="2">
+         <widget class="QTableView" name="year2Tab_viewr"/>
+        </item>
+        <item row="2" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Minimum</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>5</width>
+              <height>5</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Start Period</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="startDate1_2"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>End Period</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="endDate1_2"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="showButton_2">
+            <property name="text">
+             <string>Show</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="year2_sum">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="year3Tab">
        <property name="enabled">
@@ -219,6 +372,58 @@
        <attribute name="title">
         <string>2017</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Start Period</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="startDate1_3"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_11">
+            <property name="text">
+             <string>End Period</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="endDate1_3"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="showButton_3">
+            <property name="text">
+             <string>Show</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableView" name="year3Tab_viewl"/>
+        </item>
+        <item>
+         <widget class="QTableView" name="year3Tab_viewr"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="year4Tab">
        <property name="enabled">
@@ -227,6 +432,58 @@
        <attribute name="title">
         <string>2018</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>Start Period</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="startDate1_4"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>End Period</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="endDate1_4"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="showButton_4">
+            <property name="text">
+             <string>Show</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableView" name="year4Tab_viewl"/>
+        </item>
+        <item>
+         <widget class="QTableView" name="year4Tab_viewr"/>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="year5Tab">
        <property name="enabled">
@@ -235,6 +492,58 @@
        <attribute name="title">
         <string>2019</string>
        </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>Start Period</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="startDate1_5"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_15">
+            <property name="text">
+             <string>End Period</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDateEdit" name="endDate1_5"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="showButton_5">
+            <property name="text">
+             <string>Show</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableView" name="year5Tab_viewl"/>
+        </item>
+        <item>
+         <widget class="QTableView" name="year5Tab_viewr"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -276,7 +585,18 @@
      <string>Help</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="action_add_single_Entry"/>
+    <addaction name="action_add_multiple_entries"/>
+    <addaction name="separator"/>
+    <addaction name="action_delete_entry"/>
+    <addaction name="action_delete_multiple_entries"/>
+   </widget>
    <addaction name="menuFiles"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuImport"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -303,6 +623,38 @@
    </property>
    <property name="text">
     <string>Save Dataset</string>
+   </property>
+  </action>
+  <action name="action_add_single_Entry">
+   <property name="text">
+    <string>add single Entry</string>
+   </property>
+  </action>
+  <action name="action_add_multiple_entries">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>add multiple entries</string>
+   </property>
+  </action>
+  <action name="action_delete_entry">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>delete entry</string>
+   </property>
+  </action>
+  <action name="action_delete_multiple_entries">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>delete multiple entries</string>
    </property>
   </action>
  </widget>

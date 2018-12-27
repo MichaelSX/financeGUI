@@ -11,10 +11,10 @@
 #include <QDebug>
 
 /* Directive table names, fields, tables, and databases */
-#define DATABASE_HOSTNAME   "Finanzen2015"
-#define DATABASE_NAME       "adapted_DB.db"
+#define DATABASE_HOSTNAME   "adapted_DB2"
+#define DATABASE_NAME       "adapted_DB2.db"
 
-#define TABLE                   "Finanzen"
+#define TABLE                   "year2015"
 #define TABLE_ID                "statementID"
 #define TABLE_DATE              "Date"
 #define TABLE_AMMOUNT           "Ammount"

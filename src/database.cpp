@@ -1,31 +1,35 @@
 #include "database.h"
+#include <QSqlDatabase>
+#include <QSqlQuery>
 #include <iostream>
- 
+
 DataBase::DataBase(QObject *parent) : QObject(parent)
 {
- 
+
 }
- 
+
 DataBase::~DataBase()
 {
- 
+
 }
- 
+
 /* Methods for connecting to the database
  * */
 void DataBase::connectToDataBase()
 {
-    /* Before connecting to a database checks for its existence. 
+    /* Before connecting to a database checks for its existence.
      * Depending on the result of the opening of manufacture database or its recovery
      * */
-    if(!QFile("./data/" DATABASE_NAME).exists()){
+    if(!QFile("data/" DATABASE_NAME).exists()){
+        std::cout << "The database data/" << DATABASE_NAME <<" could not be found." << std::endl;
+        std::cout << "Trying to restore" << std::endl;
         this->restoreDataBase();
     } else {
         this->openDataBase();
-        std::cout << "database  opened" << std::endl;
+        std::cout << "database " << DATABASE_NAME << "  opened" << std::endl;
     }
 }
- 
+
 /* Methods for restoring the database
  * */
 bool DataBase::restoreDataBase()
@@ -44,7 +48,7 @@ bool DataBase::restoreDataBase()
     }
     return false;
 }
- 
+
 /* The method to open the database
  * */
 bool DataBase::openDataBase()
@@ -53,22 +57,25 @@ bool DataBase::openDataBase()
      * */
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setHostName(DATABASE_HOSTNAME);
-    db.setDatabaseName("./data/" DATABASE_NAME);
+    db.setDatabaseName("../data/" DATABASE_NAME);
     if(db.open()){
+        std::cout << "database opened. (name: " << DATABASE_NAME << ")." << std::endl;
         return true;
 
     } else {
+        std::cout << "database could not be opened.(name: " << DATABASE_NAME << ")." << std::endl;
         return false;
+
     }
 }
- 
+
 /* Method for closing database
  * */
 void DataBase::closeDataBase()
 {
     db.close();
 }
- 
+
 /* The method for creating a database table
  * */
 bool DataBase::createTable()
@@ -92,16 +99,16 @@ bool DataBase::createTable()
     }
     return false;
 }
- 
+
 /* The method to insert records into the database
  * */
 bool DataBase::inserIntoTable(const QVariantList &data)
 {
-    /* SQL Query formed from QVariantList, 
+    /* SQL Query formed from QVariantList,
      * which are transmitted in data to be inserted into the table.
      * */
     QSqlQuery query;
-    /* e SQL query is generated beginning with keys, 
+    /* e SQL query is generated beginning with keys,
      * which then bind with bindValue method for substituting data from QVariantList
      * */
     query.prepare("INSERT INTO " TABLE " ( " TABLE_ID ", "
