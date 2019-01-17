@@ -1,7 +1,7 @@
 #Cmake files
 *.cmake
-*/financeGUI_autogen
-*/CMakeFiles
+/financeGUI_autogen
+/CMakeFiles
 Makefile
 CMakeCache.txt
 
@@ -12,3 +12,11 @@ CMakeCache.txt
 #existing data
 */data
 */bin
+*/archive
+/archive
+/data
+/bin
+
+#temp files
+*.bak
+~*

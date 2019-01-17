@@ -160,7 +160,7 @@ double DbManager::updateSums(QString table, int posNeg)
    {
         qDebug() << "updateSum error:  " << query.lastError();
    }
-   std::cout << " The sum is " << sum << std::endl;
+   //std::cout << " The sum is " << sum << std::endl;
    return sum;
 }
 /*

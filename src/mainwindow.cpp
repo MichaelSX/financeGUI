@@ -78,19 +78,23 @@ void MainWindow::createUI()
         QWidget* tab = ui->tabWidget->widget(i);
         QList<QTableView *> tabItem= tab->findChildren<QTableView *>(QRegExp("year[1-9]Tab_view*"));
         QList<QLabel *> sumLabels = tab->findChildren<QLabel *>(QRegExp("year[1-9]_[sum,plus,minus]"));
+        QString labeltext;
 
         if(sumLabels.count() == 3)
         {
             for (int k = 0; k<3; k++)
             {
-                qDebug() << sumLabels[k]->objectName();
+                //qDebug() << sumLabels[k]->objectName();
                 if(sumComp.exactMatch(sumLabels[k]->objectName())) 
                 {
                     sum = sum + manager->updateSums(tableNameChosen, 0);
-                    sumLabels[k]->setText(QString::number(sum));
+                    labeltext = QString::number(sum,'f',2);
                 }
-                else if (plusComp.exactMatch(sumLabels[k]->objectName())) sumLabels[k]->setText(QString::number(manager->updateSums(tableNameChosen, 10))); 
-                else sumLabels[k]->setText(QString::number(manager->updateSums(tableNameChosen, -10))); 
+                else if (plusComp.exactMatch(sumLabels[k]->objectName())) labeltext = QString::number(manager->updateSums(tableNameChosen, 10), 'f', 2); 
+                else labeltext = QString::number(manager->updateSums(tableNameChosen, -10), 'f', 2); 
+
+                labeltext = labeltext + " €";
+                sumLabels[k]->setText(labeltext);
             }
             
             qDebug() << "numbers acquired";

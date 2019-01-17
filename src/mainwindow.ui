@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>704</width>
-    <height>450</height>
+    <width>781</width>
+    <height>498</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,60 +17,10 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="0">
-       <widget class="QDateEdit" name="inputDate">
-        <property name="focusPolicy">
-         <enum>Qt::WheelFocus</enum>
-        </property>
-        <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::UpDownArrows</enum>
-        </property>
-        <property name="correctionMode">
-         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
-        </property>
-        <property name="dateTime">
-         <datetime>
-          <hour>0</hour>
-          <minute>0</minute>
-          <second>0</second>
-          <year>2010</year>
-          <month>9</month>
-          <day>1</day>
-         </datetime>
-        </property>
-        <property name="maximumDate">
-         <date>
-          <year>7900</year>
-          <month>12</month>
-          <day>31</day>
-         </date>
-        </property>
-        <property name="minimumDate">
-         <date>
-          <year>1950</year>
-          <month>1</month>
-          <day>1</day>
-         </date>
-        </property>
-        <property name="displayFormat">
-         <string>yyyy- dd.MM</string>
-        </property>
-        <property name="calendarPopup">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="1">
        <widget class="QLabel" name="label_3">
         <property name="text">
          <string>Acc-Nr.</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Ammount</string>
         </property>
        </widget>
       </item>
@@ -114,11 +64,11 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="3">
-       <widget class="QLineEdit" name="inputPayee"/>
-      </item>
       <item row="1" column="4">
        <widget class="QLineEdit" name="inputComment"/>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLineEdit" name="inputPayee"/>
       </item>
       <item row="1" column="5">
        <widget class="QPushButton" name="pushInput">
@@ -127,10 +77,60 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="0">
+       <widget class="QDateEdit" name="inputDate">
+        <property name="focusPolicy">
+         <enum>Qt::WheelFocus</enum>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::UpDownArrows</enum>
+        </property>
+        <property name="correctionMode">
+         <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+        </property>
+        <property name="dateTime">
+         <datetime>
+          <hour>0</hour>
+          <minute>0</minute>
+          <second>0</second>
+          <year>2010</year>
+          <month>9</month>
+          <day>1</day>
+         </datetime>
+        </property>
+        <property name="maximumDate">
+         <date>
+          <year>7900</year>
+          <month>12</month>
+          <day>31</day>
+         </date>
+        </property>
+        <property name="minimumDate">
+         <date>
+          <year>1950</year>
+          <month>1</month>
+          <day>1</day>
+         </date>
+        </property>
+        <property name="displayFormat">
+         <string>yyyy- dd.MM</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_16">
         <property name="text">
          <string>Year - Date</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Ammount</string>
         </property>
        </widget>
       </item>
@@ -142,35 +142,56 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="overviewTab">
        <attribute name="title">
         <string>overview</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="QGraphicsView" name="payeesDounut"/>
-        </item>
-        <item row="0" column="2">
-         <widget class="QGraphicsView" name="SaldoLines"/>
-        </item>
-        <item row="1" column="1">
-         <widget class="QScrollBar" name="horizontalScrollBar">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
+        <item row="2" column="2">
          <widget class="QScrollBar" name="horizontalScrollBar_2">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="1" column="0">
+         <widget class="QGraphicsView" name="payeesDounut"/>
+        </item>
+        <item row="1" column="2">
+         <widget class="QGraphicsView" name="SaldoLines"/>
+        </item>
+        <item row="1" column="1">
          <widget class="QGraphicsView" name="overallMoneyLines"/>
+        </item>
+        <item row="2" column="1">
+         <widget class="QScrollBar" name="horizontalScrollBar">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Pie-Chart</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_17">
+          <property name="text">
+           <string>progress total</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="label_18">
+          <property name="text">
+           <string>progress saldo</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -179,13 +200,6 @@
         <string>2015</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="1" column="1" rowspan="2" colspan="2">
-         <widget class="QLabel" name="year1_plus">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="1" colspan="2">
          <widget class="QTableView" name="year1Tab_viewl"/>
         </item>
@@ -225,7 +239,25 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="startDate1"/>
+           <widget class="QDateEdit" name="date_year1_start">
+            <property name="maximumDate">
+             <date>
+              <year>2015</year>
+              <month>12</month>
+              <day>31</day>
+             </date>
+            </property>
+            <property name="minimumDate">
+             <date>
+              <year>2015</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+            <property name="displayFormat">
+             <string>dd.MM</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_7">
@@ -235,7 +267,35 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="endDate1"/>
+           <widget class="QDateEdit" name="date_year1_end">
+            <property name="dateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2015</year>
+              <month>12</month>
+              <day>31</day>
+             </datetime>
+            </property>
+            <property name="maximumDate">
+             <date>
+              <year>2015</year>
+              <month>12</month>
+              <day>31</day>
+             </date>
+            </property>
+            <property name="minimumDate">
+             <date>
+              <year>2015</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+            <property name="displayFormat">
+             <string>dd.MM</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="showButton">
@@ -261,6 +321,13 @@
         </item>
         <item row="2" column="3">
          <widget class="QLabel" name="year1_minus">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" colspan="2">
+         <widget class="QLabel" name="year1_plus">
           <property name="text">
            <string>TextLabel</string>
           </property>
@@ -322,7 +389,35 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="startDate1_2"/>
+           <widget class="QDateEdit" name="startDate1_2">
+            <property name="dateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2016</year>
+              <month>1</month>
+              <day>1</day>
+             </datetime>
+            </property>
+            <property name="maximumDate">
+             <date>
+              <year>2016</year>
+              <month>12</month>
+              <day>31</day>
+             </date>
+            </property>
+            <property name="minimumDate">
+             <date>
+              <year>2016</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+            <property name="displayFormat">
+             <string>dd.MM</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_9">
@@ -332,7 +427,25 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="endDate1_2"/>
+           <widget class="QDateEdit" name="endDate1_2">
+            <property name="maximumDate">
+             <date>
+              <year>2016</year>
+              <month>12</month>
+              <day>31</day>
+             </date>
+            </property>
+            <property name="minimumDate">
+             <date>
+              <year>2016</year>
+              <month>12</month>
+              <day>31</day>
+             </date>
+            </property>
+            <property name="displayFormat">
+             <string>dd.MM</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="showButton_2">
@@ -367,13 +480,20 @@
       </widget>
       <widget class="QWidget" name="year3Tab">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <attribute name="title">
         <string>2017</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <widget class="QLabel" name="year3_sum">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
            <widget class="QLabel" name="label_10">
@@ -383,7 +503,25 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="startDate1_3"/>
+           <widget class="QDateEdit" name="startDate1_3">
+            <property name="maximumDate">
+             <date>
+              <year>2017</year>
+              <month>12</month>
+              <day>31</day>
+             </date>
+            </property>
+            <property name="minimumDate">
+             <date>
+              <year>2017</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+            <property name="displayFormat">
+             <string>dd.MM</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_11">
@@ -393,7 +531,35 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="endDate1_3"/>
+           <widget class="QDateEdit" name="endDate1_3">
+            <property name="dateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2017</year>
+              <month>12</month>
+              <day>31</day>
+             </datetime>
+            </property>
+            <property name="maximumDate">
+             <date>
+              <year>2017</year>
+              <month>12</month>
+              <day>31</day>
+             </date>
+            </property>
+            <property name="minimumDate">
+             <date>
+              <year>2017</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+            <property name="displayFormat">
+             <string>dd.MM</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="showButton_3">
@@ -417,23 +583,58 @@
           </item>
          </layout>
         </item>
-        <item>
+        <item row="1" column="2">
          <widget class="QTableView" name="year3Tab_viewl"/>
         </item>
-        <item>
+        <item row="1" column="3">
          <widget class="QTableView" name="year3Tab_viewr"/>
+        </item>
+        <item row="0" column="3">
+         <widget class="QLabel" name="year3_minus">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="year3_plus">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="year4Tab">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <attribute name="title">
         <string>2018</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="QLabel" name="year4_sum">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="year4_plus">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="year4_minus">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
            <widget class="QLabel" name="label_12">
@@ -443,7 +644,25 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="startDate1_4"/>
+           <widget class="QDateEdit" name="startDate1_4">
+            <property name="maximumDate">
+             <date>
+              <year>2018</year>
+              <month>12</month>
+              <day>31</day>
+             </date>
+            </property>
+            <property name="minimumDate">
+             <date>
+              <year>2018</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+            <property name="displayFormat">
+             <string>dd.MM</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_13">
@@ -453,7 +672,35 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="endDate1_4"/>
+           <widget class="QDateEdit" name="endDate1_4">
+            <property name="dateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2018</year>
+              <month>12</month>
+              <day>31</day>
+             </datetime>
+            </property>
+            <property name="maximumDate">
+             <date>
+              <year>2018</year>
+              <month>12</month>
+              <day>31</day>
+             </date>
+            </property>
+            <property name="minimumDate">
+             <date>
+              <year>2018</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+            <property name="displayFormat">
+             <string>dd.MM</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="showButton_4">
@@ -477,23 +724,44 @@
           </item>
          </layout>
         </item>
-        <item>
+        <item row="1" column="1">
          <widget class="QTableView" name="year4Tab_viewl"/>
         </item>
-        <item>
+        <item row="1" column="2">
          <widget class="QTableView" name="year4Tab_viewr"/>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="year5Tab">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <attribute name="title">
         <string>2019</string>
        </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QLabel" name="year5_sum">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="year5_plus">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="year5_minus">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
            <widget class="QLabel" name="label_14">
@@ -503,7 +771,55 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="startDate1_5"/>
+           <widget class="QDateEdit" name="startDate1_5">
+            <property name="dateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2019</year>
+              <month>1</month>
+              <day>1</day>
+             </datetime>
+            </property>
+            <property name="maximumDateTime">
+             <datetime>
+              <hour>23</hour>
+              <minute>59</minute>
+              <second>59</second>
+              <year>2019</year>
+              <month>12</month>
+              <day>31</day>
+             </datetime>
+            </property>
+            <property name="minimumDateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2019</year>
+              <month>1</month>
+              <day>1</day>
+             </datetime>
+            </property>
+            <property name="maximumDate">
+             <date>
+              <year>2019</year>
+              <month>12</month>
+              <day>31</day>
+             </date>
+            </property>
+            <property name="minimumDate">
+             <date>
+              <year>2019</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+            <property name="displayFormat">
+             <string>dd.MM</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_15">
@@ -513,7 +829,35 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="endDate1_5"/>
+           <widget class="QDateEdit" name="endDate1_5">
+            <property name="dateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2019</year>
+              <month>12</month>
+              <day>31</day>
+             </datetime>
+            </property>
+            <property name="maximumDate">
+             <date>
+              <year>2019</year>
+              <month>12</month>
+              <day>31</day>
+             </date>
+            </property>
+            <property name="minimumDate">
+             <date>
+              <year>2019</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+            <property name="displayFormat">
+             <string>dd.MM</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="showButton_5">
@@ -537,10 +881,10 @@
           </item>
          </layout>
         </item>
-        <item>
+        <item row="1" column="1">
          <widget class="QTableView" name="year5Tab_viewl"/>
         </item>
-        <item>
+        <item row="1" column="2">
          <widget class="QTableView" name="year5Tab_viewr"/>
         </item>
        </layout>
@@ -554,7 +898,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>704</width>
+     <width>781</width>
      <height>24</height>
     </rect>
    </property>
