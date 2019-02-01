@@ -84,26 +84,34 @@ void MainWindow::createUI()
         {
             for (int k = 0; k<3; k++)
             {
-                //qDebug() << sumLabels[k]->objectName();
-                if(sumComp.exactMatch(sumLabels[k]->objectName())) 
+                //sum-label
+                if(sumComp.exactMatch(sumLabels[k]->objectName()))
                 {
                     sum = sum + manager->updateSums(tableNameChosen, 0);
                     labeltext = QString::number(sum,'f',2);
+
+                    if(sum>=0) sumLabels[k]->setStyleSheet("QLabel {color: green;}");
+                    else sumLabels[k]->setStyleSheet("QLabel {color: red;}");
                 }
-                else if (plusComp.exactMatch(sumLabels[k]->objectName())) labeltext = QString::number(manager->updateSums(tableNameChosen, 10), 'f', 2); 
-                else labeltext = QString::number(manager->updateSums(tableNameChosen, -10), 'f', 2); 
+                else if (plusComp.exactMatch(sumLabels[k]->objectName())) labeltext = QString::number(manager->updateSums(tableNameChosen, 10), 'f', 2);
+                else labeltext = QString::number(manager->updateSums(tableNameChosen, -10), 'f', 2);
+
+                //see https://www.color-hex.com/color/8e0000 for colors
+                if(labeltext.toFloat()>=0) sumLabels[k]->setStyleSheet("QLabel {color: green;}");
+                else sumLabels[k]->setStyleSheet("QLabel {color: red;}");
 
                 labeltext = labeltext + " €";
                 sumLabels[k]->setText(labeltext);
+
             }
-            
+
             qDebug() << "numbers acquired";
         }
         else
         {
             qDebug() << "not enough fields for sums";
         }
-        this->setupModel(tableNameChosen, 
+        this->setupModel(tableNameChosen,
                     QStringList()   << trUtf8("statementID")
                                     << trUtf8("Date")
                                     << trUtf8("Ammount")
@@ -119,7 +127,7 @@ void MainWindow::createUI()
             tabItem[0]->setSelectionMode(QAbstractItemView::SingleSelection); // maximum 1 row selected
             tabItem[0]->setEditTriggers(QAbstractItemView::NoEditTriggers);   // disable editing because of SQL fields
             tabItem[0]->horizontalHeader()->setStretchLastSection(true);
-    
+
             tabItem[1]->setModel(model2);
             tabItem[1]->setColumnHidden(0, true);                             // hiding id
             tabItem[1]->setSelectionBehavior(QAbstractItemView::SelectRows);  // Allow the selection of lines
@@ -131,7 +139,7 @@ void MainWindow::createUI()
             model2->select(); // Fetches the data from the table
 
             tabItem[0]->resizeColumnsToContents();
-            tabItem[1]->resizeColumnsToContents();  
+            tabItem[1]->resizeColumnsToContents();
         }
         tableNameChosen = "year" + QString::number(2015+i);
     }
@@ -140,7 +148,7 @@ void MainWindow::createUI()
 void MainWindow::updateUI(QWidget* currentTab)
 {
 
-    this->setupModel("year2015", 
+    this->setupModel("year2015",
                         QStringList()   << trUtf8("statementID")
                                         << trUtf8("Date")
                                         << trUtf8("Ammount")
@@ -161,7 +169,7 @@ void MainWindow::on_pushInput_clicked()
     QString comment = ui->inputComment->text();   // Comment field for additional information
 
     QString id = date.toString("yyyy") + "-" + QString("%1").arg(number, 3, 10, QChar('0')) +  "-" + QString("%1").arg(lfdID, 3, 10, QChar('0'));
-    //QString lastID = 
+    //QString lastID =
     manager->addEntry("year"+date.toString("yyyy"), id, date, ammount, payee, comment);
     std::cout << "You have inserted the following values" << std::endl;
     std::cout << "______________________________________" << std::endl;
@@ -174,7 +182,7 @@ void MainWindow::on_pushInput_clicked()
     qDebug() << "ID (if not exisiting): " << id;
     createUI();
     delete manager;
-    
+
 }
 void MainWindow::on_action_add_single_Entry_triggered()
 {

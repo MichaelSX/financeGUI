@@ -34,7 +34,7 @@ void DataBase::connectToDataBase()
  * */
 bool DataBase::restoreDataBase()
 {
-    if(this->openDataBase()){
+  if(this->openDataBase()){
         std::cout << "database could be opened" << std::endl;
         if(!this->createTable()){
             std::cout << "table not created" << std::endl;
