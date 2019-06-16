@@ -10,7 +10,7 @@
 #include <QRegularExpression>
 
 #include "DbManager.h"
-#include "database.h"
+//#include "database.h"
 
 
 /***********************
@@ -24,8 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    db = new DataBase();
-    db->connectToDataBase();
+    //db = new DataBase();
+    //db->connectToDataBase();
 
     //model with names if the columns
     this->createUI();
@@ -65,7 +65,7 @@ void MainWindow::createUI()
 {
     int numTabs = ui->tabWidget->count();
     QString tableNameChosen = "year2015";
-    DbManager *manager;
+    DbManager *manager = new DbManager("../../adapted_DB2.db");
     double sum = 0.00f;
     QRegExp sumComp("*sum");
     QRegExp plusComp("*plus");
@@ -105,7 +105,7 @@ void MainWindow::createUI()
 
             }
 
-            qDebug() << "numbers acquired";
+            //qDebug() << "numbers acquired";
         }
         else
         {
@@ -117,6 +117,7 @@ void MainWindow::createUI()
                                     << trUtf8("Ammount")
                                     << trUtf8("Payee")
                                     << trUtf8("Comment")
+                                    << trUtf8("SQLDate")
                         );
 
         if(tabItem.count() == 2)
@@ -127,6 +128,7 @@ void MainWindow::createUI()
             tabItem[0]->setSelectionMode(QAbstractItemView::SingleSelection); // maximum 1 row selected
             tabItem[0]->setEditTriggers(QAbstractItemView::NoEditTriggers);   // disable editing because of SQL fields
             tabItem[0]->horizontalHeader()->setStretchLastSection(true);
+            tabItem[0]->setColumnHidden(5, true);
 
             tabItem[1]->setModel(model2);
             tabItem[1]->setColumnHidden(0, true);                             // hiding id
@@ -134,6 +136,7 @@ void MainWindow::createUI()
             tabItem[1]->setSelectionMode(QAbstractItemView::SingleSelection); // maximum 1 row selected
             tabItem[1]->setEditTriggers(QAbstractItemView::NoEditTriggers);   // disable editing because of SQL fields
             tabItem[1]->horizontalHeader()->setStretchLastSection(true);
+            tabItem[1]->setColumnHidden(5, true);
 
             model->select(); // Fetches the data from the table
             model2->select(); // Fetches the data from the table
@@ -154,13 +157,14 @@ void MainWindow::updateUI(QWidget* currentTab)
                                         << trUtf8("Ammount")
                                         << trUtf8("Payee")
                                         << trUtf8("Comment")
+                                        << trUtf8("SQLDate")
                     );
     this->createUI();
 }
 
 void MainWindow::on_pushInput_clicked()
 {
-    DbManager *manager = new DbManager("../data/adapted_DB2.db");
+    DbManager *manager = new DbManager("../../adapted_DB2.db");
     int lfdID = 1;
     QDate date = ui->inputDate->date();                              // year for clustering and first value of ID
     int number = ui->inputAccNr->value();                           // account number if existing, otherwise used as thousand-seperator
@@ -187,7 +191,7 @@ void MainWindow::on_pushInput_clicked()
 void MainWindow::on_action_add_single_Entry_triggered()
 {
     QString table = "year2015";
-    manager = new DbManager("../data/adapted_DB2.db");
+    manager = new DbManager("../../adapted_DB2.db");
     manager->getEntry(table);
     delete manager;
 }
@@ -196,4 +200,62 @@ void MainWindow::currentDateUpdate()
 {
     QDate newDate;
     ui->inputDate->setDate(newDate);
+}
+
+void MainWindow::on_showButton_clicked()
+{
+  int numTabs = ui->tabWidget->count();
+  QString begin = ui->dateEdit->date().toString(Qt::ISODate);
+  QString end = ui->dateEdit_2->date().toString(Qt::ISODate);
+  QString tableName = "year2015";
+  QString prevFilter = "ammount > -0.01";
+  QString prevFilter2="ammount < 0";
+
+  qDebug() << begin << " until " << end;
+
+
+  for(int i=1; i<numTabs; i++)
+  {
+    QWidget* currTab = ui->tabWidget->widget(i);
+    qDebug() << i << "/" << numTabs-1;
+    QList<QTableView *> tabItem= currTab->findChildren<QTableView *>(QRegExp("year[1-9]Tab_view*"));
+
+    this->setupModel(tableName,
+                QStringList()   << trUtf8("statementID")
+                                << trUtf8("Date")
+                                << trUtf8("Ammount")
+                                << trUtf8("Payee")
+                                << trUtf8("Comment")
+                                << trUtf8("SQLDate")
+                    );
+
+
+    //model->setTable(tableName);
+    //model2->setTable(tableName);
+
+    model->setFilter(prevFilter + " AND SQLDate >'" + begin  +"' AND SQLDate<'" +end+"'");
+    model2->setFilter(prevFilter2 + " AND SQLDate >'" + begin + "' AND SQLDate<'" +end+"'");
+
+    model->select(); // Fetches the data from the table
+    model2->select(); // Fetches the data from the table
+
+    tabItem[0]->setModel(model);
+    tabItem[1]->setModel(model2);
+
+
+
+    //if(tabItem.count() == 2)
+    //{
+      //qDebug() << "Tab = " << currTab.currentIndex();
+    //  model->setFilter(prevFilter + " AND SQLDate >'" + begin  +"' AND SQLDate<'" +end+"'");
+    //  model2->setFilter(prevFilter2 + " AND SQLDate >'" + begin + "' AND SQLDate<'" +end+"'");
+    //}
+    tableName = "year" + QString::number(2015+i);
+
+  }
+
+  //model->setTable("year2017");
+  //model2->setTable("year2017");
+
+  //*/
 }

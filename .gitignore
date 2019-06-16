@@ -15,6 +15,7 @@ CMakeCache.txt
 */archive
 /archive
 /data
+!data/dummy_DB.db
 /bin
 
 #temp files

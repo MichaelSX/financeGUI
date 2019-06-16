@@ -19,7 +19,7 @@ DbManager::DbManager(const QString path)
 {
    m_db = QSqlDatabase::addDatabase("QSQLITE");
    m_db.setDatabaseName(path);
- 
+
    if (!m_db.open())
    {
       qDebug() << "Error: connection with database fail";
@@ -58,7 +58,7 @@ bool DbManager::addEntry(QString table, QString id, QDate current, double ammoun
    			qDebug() << query2.value(0);
    			if(lastID.mid(9,3).toInt() < query2.value(0).toString().mid(9,3).toInt()) lastID = query2.value(0).toString();
    		}
-   		
+
    		qDebug() << "lastID: " << lastID;
    		if (id <= lastID)
    		{
@@ -67,7 +67,7 @@ bool DbManager::addEntry(QString table, QString id, QDate current, double ammoun
    		}
    		else
    		{
-   			//id = 
+   			//id =
    		}
    }
    else
@@ -78,13 +78,14 @@ bool DbManager::addEntry(QString table, QString id, QDate current, double ammoun
 
 
 
-    query2.prepare("INSERT INTO "+ table + " (StatementID, Date, Ammount, Payee, Comment) "
-                  "VALUES (:id, :date, :ammount, :payee, :comment)");
+    query2.prepare("INSERT INTO "+ table + " (StatementID, Date, Ammount, Payee, Comment, SQLDate) "
+                  "VALUES (:id, :date, :ammount, :payee, :comment, :sqldate)");
     query2.bindValue(":id", id);
     query2.bindValue(":date", current.toString("dd.MM.yyyy"));
     query2.bindValue(":ammount", ammount);
     query2.bindValue(":payee", payee);
     query2.bindValue(":comment", comment);
+    query2.bindValue(":sqldate", current.toString("YYYY-MM-DD HH:MM:SS"));
 
    if(query2.exec())
    {
@@ -95,7 +96,7 @@ bool DbManager::addEntry(QString table, QString id, QDate current, double ammoun
    {
         qDebug() << "addEntry error:  " << query2.lastError();
    }
- 
+
    return success;
 }
 
@@ -109,12 +110,12 @@ bool DbManager::getEntry(QString table, QString column, QString whereClause)
    std::cout << "column: " << column.toStdString() << std::endl;
    std::cout << "where: " << whereClause.toStdString() << std::endl;
    std::cout << "Statement: SELECT " << column.toStdString() << " FROM " << table.toStdString() << " " << whereClause.toStdString() << std::endl;
-   
+
    // workaround, as table names are to lng for binding values
    std::stringstream ss;
    ss << "SELECT " << column.toStdString() << " FROM " << table.toStdString() << " " << whereClause.toStdString() << ";";
    QString queryString = QString::fromStdString(ss.str());
-   
+
    query.prepare(queryString);
    //query.bindValue(":column", column);
    //query.bindValue(":table1", "year");
@@ -123,7 +124,7 @@ bool DbManager::getEntry(QString table, QString column, QString whereClause)
 
    if(query.exec())
    {
-		while (query.next()) 
+		while (query.next())
 		{
         	std::cout << query.value(1).toString().toStdString() << " | " << query.value(2).toString().toStdString() << std::endl;
         	//qDebug() << name << salary;
@@ -135,7 +136,7 @@ bool DbManager::getEntry(QString table, QString column, QString whereClause)
    {
         qDebug() << "getEntry error:  " << query.lastError();
    }
- 
+
    return success;
 }
 double DbManager::updateSums(QString table, int posNeg)
@@ -150,7 +151,7 @@ double DbManager::updateSums(QString table, int posNeg)
 	query.prepare(prepareStatement);
 	   if(query.exec())
    {
-		while (query.next()) 
+		while (query.next())
 		{
 			sum = sum + query.value(0).toDouble();
 			//qDebug() << query.value(0).toInt();
@@ -170,7 +171,7 @@ if (personExists(name))
    query.prepare("DELETE FROM people WHERE name = (:name)");
    query.bindValue(":name", name);
    success = query.exec();
- 
+
    if(!success)
    {
        qDebug() << "removePerson error: "

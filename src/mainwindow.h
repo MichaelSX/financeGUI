@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QtSql/QSqlTableModel>
-#include "database.h"
+//#include "database.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,7 +20,7 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    DataBase *db;
+    //DataBase *db;
     QSqlTableModel *model;
     QSqlTableModel *model2;
 
@@ -33,6 +33,7 @@ private slots:
     void createUI();
     void updateUI(QWidget* currentTab);
     void currentDateUpdate();
+    void on_showButton_clicked();
 };
 
 #endif // MAINWINDOW_H
