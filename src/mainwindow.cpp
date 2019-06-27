@@ -329,9 +329,9 @@ void MainWindow::printCharts()
     }
     sum = sum+manager->sumMonth(year,12);
   }
-  for(int k = 0; k < manager->getCategory(2015, 2016).size(); k++)
+  for(int k = 0; k < 5; k++)
   {
-    categoryPie->append(manager->getCategory(2015, 2016)[k].first,manager->ammountPerCategory(manager->getCategory(2015, 2016)[k].first, 2015, 2017));
+    categoryPie->append(manager->getCategory(2015, 2019)[k].first,manager->ammountPerCategory(manager->getCategory(2015, 2019)[k].first, 2015, 2019));
   }
 
 

@@ -252,6 +252,15 @@ double DbManager::ammountPerCategory(QString category, int minyear, int maxyear)
   }
   return ammount;
 }
+// https://www.geeksforgeeks.org/sorting-vector-of-pairs-in-c-set-1-sort-by-first-and-second/
+// Driver function to sort the 2D vector
+// on basis of a particular column
+// for next function
+bool sortcol( const std::pair<QString, double> &v1,
+              const std::pair<QString, double> &v2 )
+{
+  return (abs(v1.second) > abs(v2.second));
+}
 
 std::vector<std::pair<QString, double>> DbManager::getCategory(int minyear, int maxyear)
 {
@@ -315,5 +324,8 @@ std::vector<std::pair<QString, double>> DbManager::getCategory(int minyear, int 
       }
     }
   }
+
+  std::sort(cat.begin(), cat.end(),sortcol);
+  //qDebug() << cat;
   return cat;
 }
