@@ -4,6 +4,9 @@
 
 GUI for tracking statements and visual evaluation.
 
+![GUI Charts](doc/GUI_diagrams.png "GUI Charts")
+![GUI Tables](doc/GUI-TableView.png "GUI Tables")
+
 For productive usage create a SQLite3 database similar to dummy_db.db, copy the config file, rename it to config.txt and adapt the path to the database-file. This config-file will not be tracked by git.
 
 #### Next Steps:
