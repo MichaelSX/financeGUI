@@ -24,6 +24,10 @@ public:
     bool addEntry(QString, QString, QDate, double, QString, QString);
     bool getEntry(QString, QString column="*", QString whereClause="WHERE StatementID > -10000");
     double updateSums(QString table, int posNeg);
+    double saldoMonth(int, int);
+    double sumMonth(int, int);
+    double ammountPerCategory(QString, int, int);
+    std::vector<std::pair<QString, double>> getCategory(int, int);
 };
 
 #endif //DBMANGER_H

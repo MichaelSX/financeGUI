@@ -18,6 +18,8 @@ find_package(Qt5Widgets)
 MESSAGE("Found Widgets package")
 find_package(Qt5Sql)
 MESSAGE("Found Sql package")
+find_package(Qt5Charts)
+MESSAGE("Found Charts package")
 
 # add ressources
 file(GLOB RESSOURCES
@@ -35,4 +37,4 @@ file(GLOB SOURCES
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} ${HEADERS})
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets Qt5::Sql)
+target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets Qt5::Sql Qt5::Charts)

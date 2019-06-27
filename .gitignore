@@ -10,7 +10,10 @@ CMakeCache.txt
 *.user
 
 #existing data
-*/data
+*/data/config.txt
+!data/default_config.txt
+!data/dummy_db.db
+data
 */bin
 */archive
 /archive

@@ -173,12 +173,6 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0" colspan="2">
-         <widget class="QGraphicsView" name="payeesDounut"/>
-        </item>
-        <item row="3" column="2" colspan="2">
-         <widget class="QGraphicsView" name="overallMoneyLines"/>
-        </item>
         <item row="2" column="3">
          <widget class="QLabel" name="label_17">
           <property name="text">
@@ -244,9 +238,6 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="4" colspan="3">
-         <widget class="QGraphicsView" name="SaldoLines"/>
-        </item>
         <item row="1" column="4">
          <spacer name="horizontalSpacer_6">
           <property name="orientation">
@@ -264,6 +255,48 @@
          <widget class="QPushButton" name="showButton">
           <property name="text">
            <string>Show</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2" colspan="2">
+         <widget class="QtCharts::QChartView" name="totalLines">
+          <property name="minimumSize">
+           <size>
+            <width>400</width>
+            <height>200</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4" colspan="2">
+         <widget class="QtCharts::QChartView" name="saldoLines">
+          <property name="minimumSize">
+           <size>
+            <width>400</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>400</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QtCharts::QChartView" name="pieOverview">
+          <property name="minimumSize">
+           <size>
+            <width>400</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>400</width>
+            <height>16777215</height>
+           </size>
           </property>
          </widget>
         </item>
@@ -700,6 +733,14 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QtCharts::QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">QtCharts/QChartView&gt;
+#include &lt;QtCharts/chartsnamespace.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

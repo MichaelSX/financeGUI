@@ -8,9 +8,16 @@
 #include <QTabWidget> // QWidget to get both from above
 #include <QDebug>
 #include <QRegularExpression>
+#include <QFile>
+#include <QMessageBox>
+//#include <QLineSeries>
+#include <QtCharts>
+
 
 #include "DbManager.h"
-//#include "database.h"
+
+static QString databaseFile;
+
 
 
 /***********************
@@ -22,14 +29,16 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
 
+    ui->setupUi(this);
+    databaseFile = readConfigDirectory();
     //db = new DataBase();
     //db->connectToDataBase();
 
     //model with names if the columns
     this->createUI();
     ui->inputDate->setDate(QDate::currentDate());
+    printCharts();
 }
 
 MainWindow::~MainWindow()
@@ -65,7 +74,7 @@ void MainWindow::createUI()
 {
     int numTabs = ui->tabWidget->count();
     QString tableNameChosen = "year2015";
-    DbManager *manager = new DbManager("../../adapted_DB2.db");
+    DbManager *manager = new DbManager(databaseFile);
     double sum = 0.00f;
     QRegExp sumComp("*sum");
     QRegExp plusComp("*plus");
@@ -146,6 +155,7 @@ void MainWindow::createUI()
         }
         tableNameChosen = "year" + QString::number(2015+i);
     }
+    delete manager;
 }
 
 void MainWindow::updateUI(QWidget* currentTab)
@@ -164,7 +174,7 @@ void MainWindow::updateUI(QWidget* currentTab)
 
 void MainWindow::on_pushInput_clicked()
 {
-    DbManager *manager = new DbManager("../../adapted_DB2.db");
+    DbManager *manager = new DbManager(databaseFile);
     int lfdID = 1;
     QDate date = ui->inputDate->date();                              // year for clustering and first value of ID
     int number = ui->inputAccNr->value();                           // account number if existing, otherwise used as thousand-seperator
@@ -191,7 +201,7 @@ void MainWindow::on_pushInput_clicked()
 void MainWindow::on_action_add_single_Entry_triggered()
 {
     QString table = "year2015";
-    manager = new DbManager("../../adapted_DB2.db");
+    manager = new DbManager(databaseFile);
     manager->getEntry(table);
     delete manager;
 }
@@ -211,8 +221,7 @@ void MainWindow::on_showButton_clicked()
   QString prevFilter = "ammount > -0.01";
   QString prevFilter2="ammount < 0";
 
-  qDebug() << begin << " until " << end;
-
+//  qDebug() << begin << " until " << end
 
   for(int i=1; i<numTabs; i++)
   {
@@ -229,10 +238,6 @@ void MainWindow::on_showButton_clicked()
                                 << trUtf8("SQLDate")
                     );
 
-
-    //model->setTable(tableName);
-    //model2->setTable(tableName);
-
     model->setFilter(prevFilter + " AND SQLDate >'" + begin  +"' AND SQLDate<'" +end+"'");
     model2->setFilter(prevFilter2 + " AND SQLDate >'" + begin + "' AND SQLDate<'" +end+"'");
 
@@ -242,20 +247,138 @@ void MainWindow::on_showButton_clicked()
     tabItem[0]->setModel(model);
     tabItem[1]->setModel(model2);
 
-
-
-    //if(tabItem.count() == 2)
-    //{
-      //qDebug() << "Tab = " << currTab.currentIndex();
-    //  model->setFilter(prevFilter + " AND SQLDate >'" + begin  +"' AND SQLDate<'" +end+"'");
-    //  model2->setFilter(prevFilter2 + " AND SQLDate >'" + begin + "' AND SQLDate<'" +end+"'");
-    //}
     tableName = "year" + QString::number(2015+i);
+  }
+  printCharts();
+}
 
+QString MainWindow::readConfigDirectory()
+{
+  QFile defaultFile("../data/default_config.txt");
+  QFile customFile("../data/config.txt");
+  QString line;
+
+  if(!customFile.open(QIODevice::ReadOnly))
+  {
+    if(!defaultFile.open(QIODevice::ReadOnly))
+    {
+      QMessageBox::information(0, "error", defaultFile.errorString());
+    }
+    else
+    {
+      QTextStream input(&defaultFile);
+
+      while(!input.atEnd())
+      {
+        line = input.readLine();
+      }
+      customFile.close();
+    }
+  }
+  else
+  {
+    QTextStream input(&customFile);
+    while(!input.atEnd())
+    {
+      line = input.readLine();
+    }
+    customFile.close();
+  }
+  //QMessageBox::information(0, "Path", line);
+  return line;
+}
+
+void MainWindow::printCharts()
+{
+  DbManager *manager = new DbManager(databaseFile);
+
+  QtCharts::QLineSeries *monthlySaldo = new QtCharts::QLineSeries();
+  QtCharts::QLineSeries *monthlySum   = new QtCharts::QLineSeries();
+  QtCharts::QPieSeries  *categoryPie  = new QtCharts::QPieSeries();
+
+  QChart *saldoChart  = new QChart();
+  QChart *sumChart    = new QChart();
+  QChart *pieChart    = new QChart();
+
+  QDate currDate = QDate(2015,1,1);
+  QDateTime *currentDateTime = new QDateTime(); // int year, month, day format
+  double currentSaldo = 0.00f;
+  double currentSum   = 0.00f;
+  QPointF currPointSaldo;
+  QPointF currPointSum;
+  std::string categories[] = {"Tester2", "Tester", "Tester2", "Tester2", "Tester"};
+  int sum=0;
+
+
+  //add saldo and total data to each month from first to last year
+  for(int year = 2015; year <= 2019; year++) // adapt to varaible year, depending on tables
+  {
+    for(int month=1;month<=12; month++)
+    {
+      currDate.setDate(year, month,1);
+      currentDateTime->setDate(currDate);
+      currentSaldo = manager->saldoMonth(year,month);
+      currentSum = sum+manager->sumMonth(year,month);
+      currPointSaldo.setX(currentDateTime->toMSecsSinceEpoch());
+      currPointSaldo.setY(currentSaldo);
+      currPointSum.setX(currentDateTime->toMSecsSinceEpoch());
+      currPointSum.setY(currentSum);
+      //qDebug() << "y = " << currentSaldo << " | x = " << currentDateTime->toMSecsSinceEpoch();
+      monthlySaldo->append(currPointSaldo);
+      monthlySum->append(currPointSum);
+    }
+    sum = sum+manager->sumMonth(year,12);
+  }
+  for(int k = 0; k < manager->getCategory(2015, 2016).size(); k++)
+  {
+    categoryPie->append(manager->getCategory(2015, 2016)[k].first,manager->ammountPerCategory(manager->getCategory(2015, 2016)[k].first, 2015, 2017));
   }
 
-  //model->setTable("year2017");
-  //model2->setTable("year2017");
 
-  //*/
+  saldoChart->legend()->hide();
+  saldoChart->addSeries(monthlySaldo);
+  saldoChart->setTitle("Saldo");
+  sumChart->legend()->hide();
+  sumChart->addSeries(monthlySum);
+  sumChart->setTitle("Total");
+  pieChart->addSeries(categoryPie);
+  //pieChart->setTitle("Pie");
+
+  QDateTimeAxis *axisX = new QDateTimeAxis;
+  QDateTimeAxis *axisX2= new QDateTimeAxis;
+  QValueAxis *axisY = new QValueAxis;
+  QValueAxis *axisY2= new QValueAxis;
+
+  //axisX->setTickCount(12*4/4-1);//every half Year
+  axisX->setFormat("MM yy");
+  axisX->setTitleText("Date");
+  axisY->setLabelFormat("EUR %i"); // EUR %.2f for 2 decimal places
+  //axisY->setTitleText("Ammount");
+  axisY->setTickCount(9);
+  axisY->setRange(-3000, 5000);
+
+  axisX2->setFormat("MM yy");
+  axisX2->setTitleText("Date");
+  axisY2->setLabelFormat("EUR %i"); // EUR %.2f for 2 decimal places
+  //axisY2->setTitleText("Ammount");
+  axisY2->setTickCount(7);
+  axisY2->setRange(0, 6000);
+
+  saldoChart->addAxis(axisX, Qt::AlignBottom);
+  sumChart->addAxis(axisX2, Qt::AlignBottom);
+  monthlySaldo->attachAxis(axisX);
+  monthlySum->attachAxis(axisX2);
+  saldoChart->addAxis(axisY, Qt::AlignLeft);
+  monthlySaldo->attachAxis(axisY);
+  sumChart->addAxis(axisY2, Qt::AlignLeft);
+  monthlySum->attachAxis(axisY2);
+
+
+  ui->saldoLines->setChart(saldoChart);
+  ui->totalLines->setChart(sumChart);
+  ui->pieOverview->setChart(pieChart);
+
+  //qDebug() << manager->getCategory(2015, 2016)[0].first; //First row, first element
+  //qDebug() << manager->getCategory(2015, 2016)[1].second;
+  delete manager;
 }

@@ -34,6 +34,8 @@ private slots:
     void updateUI(QWidget* currentTab);
     void currentDateUpdate();
     void on_showButton_clicked();
+    QString readConfigDirectory();
+    void printCharts();
 };
 
 #endif // MAINWINDOW_H
